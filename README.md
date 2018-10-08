@@ -1,6 +1,13 @@
 # Kubernetes running on local Virtualbox Ubuntu 18.04 LTS install 
 Configure 1 master with at least 1GB of memory and 2 to 3 Worker nodes with each 4GB of memory. Configure them with Bridged network setup in Virtualbox, but do adjust the machines to have a fixed IP after install, make sure this fixed IP does not overlap with DHCP-scope or get a reserved part.
 
+#TLDR
+- Install and bootstrap cluster nodes <link to KubernetesInstall.md>
+- Install with Kubeadm <link to KubernetesInstall.md>
+- Configure RBAC, AuthN/AuthZ for use of Kubernetes <other.md WIP>
+- Configure Integration (CI/CD) ..... <WIP>
+
+
 Make sure to update after install:
 
 <code>sudo apt-get dist-update && sudo apt-get dist-upgrade -y</code>
