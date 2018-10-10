@@ -1,5 +1,5 @@
 # Finnaly, we can use Kubernetes...
-Depending on the install method, current version or environment of your install, Kubernetes is a different beast to tame. The additition of (default) RBAC and not yet updated documentation can get you into a rabbit-hole quest. Best to keep focus on what you want to achieve, how and even if it will be sustainable and maintainable for others.
+Depending on the install method, current version or environment of your install, Kubernetes is a different beast to tame. The additition of (default) RBAC and not yet updated documentation can make you feel like Alice falling into a rabbit-hole. Best to keep focus on what you want to achieve, how and,when shared with others, if it will be sustainable and maintainable for others.
 
 
 ## Are we there yet..?
@@ -21,7 +21,11 @@ First of we'll setup the dashboard for remote access. Since the introduction of 
 
 
 ## Ingress, NodePort, LoadBalancer, HostPort etc..
-ingress-nginx kuberneties way
+Publishing anything on Kubernetes is done via a Service, which gets coupled to a cluster resources like Pods (or also Service outside the cluster), to abstract away finding an available and correct Pod on Worker Nodes. 
+Ingress pre works with HTTP, con works ONLY with HTTP
+You need a controller I've selected the ingress-nginx kubernetes controller, which will act like a reverse proxy, getting requests to my Service and in turn to the correct Pod(s).
+Other options: 
+NodePort, mapping a (random) port on the Master which makes the Pod accesible on multiple Worker Nodes. For quick setup and demo an easy way to gain access to your published Pod 
 
 
 ## Integration strategy
