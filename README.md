@@ -12,8 +12,10 @@ Do not underestimate the amount of time you'll spend making this setup work for 
 Configure 1 master with at least 1GB of memory and 2 to 3 Worker nodes with each 4GB of memory. Configure them with Bridged network setup in Virtualbox, but do adjust the machines to have a fixed IP after install, make sure this fixed IP does not overlap with DHCP-scope or get a reserved part. In my case I have a small portable hub, which I can NAT through to my phones shared wifi for Internet connection during demo, your setup might vary..
 
 # Demo Workflow Software Delivery, then Deploy to production..
-Setup for this demo is based on gitlab.com online service, in future I'll also setup a stand-a-lone gitlab instance or in a different kubernetes namespace, not sure yet.. 
-What is needed is AuthN/AuthZ setup in RBAC'ed Kubernetes cluster to work and to not have priveledge escalation possibilities in the Docker build process (which should be possible now that multiple solutions are available..)
+Setup for this demo is based on gitlab.com online service working with the local kubernetes cluster install. In future I'll also setup a stand-a-lone gitlab instance or in a different kubernetes namespace on the cluster, not sure yet.. 
+What is needed is AuthN/AuthZ setup in RBAC'ed Kubernetes cluster to work and to not have priveledge escalation possibilities in the Docker build process (which should be possible now that multiple solutions are available for not running as root and not depending on the docker runtime for build..)
 <pre>
 [DEV]--Checks-in-Code-->[CI][CD]-Deploy-to-Production-->[PROD]     
 </pre>
+
+For build repository for Docker, I'll select either the docker hub or the one in gitlab, not sure yet..
