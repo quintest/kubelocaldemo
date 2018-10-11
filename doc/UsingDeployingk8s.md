@@ -15,13 +15,26 @@ Basic proxy distiction can be made:
 - pod/cluster networking proxies
 - user proxies, publishing proxies
 
-In turn all these proxies have differering limitations and/or requirements for setting up authentication. This where a Kubernetes cluster as a service really looks very tempting, as they offer most of this in a more easy configurable way, but it wouldn't be that much fun, building on a GKE is just a matter of being able to apply for a creditcard and filling out your billing details.
+In turn all these proxies have differering limitations and/or requirements for setting up authentication. This is where a Kubernetes cluster-as-a-Service really looks very tempting, as they offer most of these options in a easy and configurable way. But it wouldn't be that much fun, building on a GKE is just a matter of being able to apply for a creditcard and filling out your billing details.
 
 ### Kubectl proxy for Dashboard access
-First of we'll setup the dashboard for remote access. Since the introduction of RBAC (default on in recent versions of kubeadm), the Dashboard has some rights restricted. This results in a lot of access deniad banners. To give a correct overview of your cluster in the Dashboard you have to login using an account with the correct priviledges (or implement the non-recommended "give Dashboard service the rights to access cluster resources"-way).
+First of we'll setup the dashboard for remote access. Since the introduction of RBAC (default on in recent versions of kubeadm), the Dashboard has some rights restricted. This results in a lot of access denied banners. To give a correct overview of your cluster in the Dashboard you have to login using an account with the correct priviledges (or implement the non-recommended "give Dashboard service the rights in RBAC to access cluster resources"-way).
 
-If you are able to reach the standard kubectl proxy service from your workstation, you can use your local install of kubectl and simply proxy the Dashboard to a local port of choice on your local machine. Fisrt we setup kubectl for remote access on your workstation. For this to work I selected the more insecure option of using the 'admin.conf' locally to authenticate. First of copy the current admin.conf to your local machine, the example is scp based:
+- [x] Connect to Dashboard
+- [ ] Setup correct Authentication and Authorization
 
+We'll start of by enabling Dashboard connectivity through a local kubectl proxy command. If you are able to reach the standard kubectl proxy service from your workstation, you can use a local install of kubectl and simply proxy the Dashboard to a local port of choice on your local machine. 
+
+Get the kubectl version corresponding to your cluster version, in the command prompt of your server just type in:
+
+```
+kubectl version
+```
+
+Just follow the instruction to install kubectl on your local workstation:
+[https://kubernetes.io/docs/tasks/tools/install-kubectl/](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+
+Now we start the setup of kubectl for remote access from your workstation. For this to work I selected the more insecure option of using the 'admin.conf' locally to authenticate. First of copy the current admin.conf from your cluster Master node to your local machine, the example is scp based:
 ```
 scp root@yourmaster:/etc/kubernetes/admin.conf .
 ```
@@ -32,6 +45,11 @@ kubectl --kubeconfig ./admin.conf proxy
 Then open Dashboard in a browser window by clciking [http://127.0.0.1:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/](http://127.0.0.1:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/)
 
 **NOTE: Get screenshot of new cluster Dashboard**
+
+
+
+As you can see in the screen shot, authentication needs to be setup. 
+
 
 ## Ingress, NodePort, LoadBalancer, HostPort etc..
 Publishing anything on Kubernetes is done via a Service, which gets coupled to a cluster resources like Pods (or also Service outside the cluster), to abstract away finding an available and correct Pod on Worker Nodes. 
