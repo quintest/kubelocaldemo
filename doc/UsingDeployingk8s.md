@@ -34,22 +34,25 @@ kubectl version
 Just follow the instruction to install kubectl on your local workstation:
 [https://kubernetes.io/docs/tasks/tools/install-kubectl/](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
-Now we start the setup of kubectl for remote access from your workstation. For this to work I selected the more insecure option of using the 'admin.conf' locally to authenticate. First of copy the current admin.conf from your cluster Master node to your local machine, the example is scp based:
+Now we start the setup of kubectl for remote access from your workstation. For this to work I selected the more insecure option of using the 'admin.conf' locally to authenticate. First of copy the current admin.conf from your cluster Master node to your local machine, the example is scp based (make sure there's no prior config or it will be overwritten!):
 ```
-scp root@yourmaster:/etc/kubernetes/admin.conf .
+scp root@yourmaster:/etc/kubernetes/admin.conf .kube/config
+```
+Dashboard is not installed by default and needs to be setup with the following command:
+```
+kubectl create -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
 ```
 Then run the following command to proxy kubectl (and the Dashboard) to your loacalhost:8001 adress:
 ```
-kubectl --kubeconfig ./admin.conf proxy
+kubectl proxy
 ```
 Then open Dashboard in a browser window by clciking [http://127.0.0.1:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/](http://127.0.0.1:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/)
 
-**NOTE: Get screenshot of new cluster Dashboard**
-
-
+![](ss.png)
 
 As you can see in the screen shot, authentication needs to be setup. 
 
+To enable this
 
 ## Ingress, NodePort, LoadBalancer, HostPort etc..
 Publishing anything on Kubernetes is done via a Service, which gets coupled to a cluster resources like Pods (or also Service outside the cluster), to abstract away finding an available and correct Pod on Worker Nodes. 
