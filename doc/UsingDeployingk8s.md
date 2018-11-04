@@ -4,8 +4,8 @@ Depending on the install method, current version or environment of your install,
 
 ## Are we there yet..?
 First we'll outline the different networtk and authentication methods we'll be using:
-- For networking and network (policy) Canal (Calico/Flannel) was implement when following [the previous part](KubernetesInstall.md)
-- Connecting and authenticating, administrative access
+- [x] For networking and network (policy) Canal (Calico/Flannel) was implement when following [the previous part](KubernetesInstall.md)
+- [ ] Connecting and authenticating, administrative access
 
 ## Proxy access
 Kubernetes is build upon abstractions, which in theory make it more fit for purpose, abstracting some of the cluster complexity away from the 'normal' user. Depending on what you want to achieve with your Kubernetes setup there are overwhelming amounts of choices to make. Depending on the tooling you want to use at an higher abstraction, some choices are dictated, simply because the tooling is opinionated or the tooling is simply not ready to make use of yet another change to the Kubernets default install. Let alone all dialects of Kubernetes provided by different vendors (Openshift and CSP specific Kubernetes setups..).
@@ -38,6 +38,10 @@ Now we start the setup of kubectl for remote access from your workstation. For t
 ```
 scp root@yourmaster:/etc/kubernetes/admin.conf .kube/config
 ```
+Now you can run kubectl also from your local workstation command line, but to setup authentication from a webbrowser it gets more complicated. First of we need to select an Authentication provider, I've selected Google as my idp, based on OpenID Connect. For the TL;DR version just walk thorugh the next steps I'll try and create a blogpost with more details and reference.
+
+**--NEXT STEPS--NOT READY YET--**
+
 Dashboard is not installed by default and needs to be setup with the following command:
 ```
 kubectl create -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
