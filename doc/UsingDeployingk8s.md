@@ -41,6 +41,7 @@ scp root@yourmaster:/etc/kubernetes/admin.conf .kube/config
 Now you can run kubectl also from your local workstation command line, but to setup authentication from a webbrowser it gets more complicated. First of we need to select an Authentication provider, I've selected Google as my idp, based on OpenID Connect. For the TL;DR version just walk thorugh the next steps I'll try and create a blogpost with more details and reference.
 
 **--NEXT STEPS--NOT READY YET--**
+- [ ] Create user and setup role binding to 
 
 Dashboard is not installed by default and needs to be setup with the following command:
 ```
